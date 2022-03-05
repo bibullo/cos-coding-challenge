@@ -4,4 +4,26 @@ module.exports = {
   },
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!.*.mjs$|@datorama/akita)',
+  ],
+  collectCoverageFrom: ['src/**/*.ts'],
+  coveragePathIgnorePatterns: [
+    'node_modules',
+    'test-config',
+    '.mock.ts',
+    '.module.ts',
+    '<rootDir>/src/main.ts',
+    '<rootDir>/src/polyfills.ts',
+    '<rootDir>/src/environments',
+  ],
+  coverageDirectory: '<rootDir>/coverage/',
+  coverageThreshold: {
+    global: {
+      branches: 50,
+      functions: 50,
+      lines: 50,
+      statements: 50,
+    },
+  },
 };
