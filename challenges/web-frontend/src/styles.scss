@@ -1,6 +1,7 @@
 body {
   height: 100vh;
-  margin: unset;
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
 p,
@@ -11,5 +12,4 @@ h4,
 h5,
 h6 {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
 }
