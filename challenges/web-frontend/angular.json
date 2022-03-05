@@ -102,6 +102,6 @@
   },
   "defaultProject": "car-on-sale",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@datorama/akita"
   }
 }
