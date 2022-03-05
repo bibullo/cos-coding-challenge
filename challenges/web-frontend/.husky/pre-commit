@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+cd challenges/web-frontend
+npx prettier --write . && git update-index --again
+#ng lint && npx prettier --write . && git update-index --again
