@@ -31,7 +31,9 @@ describe('AuthService', () => {
   it('should have a login function', () => {
     const expectedBody = { password: 'mockPassword', meta: 'string' };
     const expectedUrl = `${environment.apiUrl}/authentication/mockUserId`;
+
     const storeSpy = jest.spyOn(authStore, 'updateAuthUser');
+    const updateSpy = jest.spyOn(authStore, 'updateLoadingState');
 
     authService.login('mockUserId', 'mockPassword');
 
@@ -41,6 +43,8 @@ describe('AuthService', () => {
     expect(mockRequest.request.method).toBe('PUT');
     expect(mockRequest.request.body).toEqual(expectedBody);
     expect(storeSpy).toBeCalledWith(authUserMock);
+    expect(updateSpy.mock.calls[0][0]).toBe(true);
+    expect(updateSpy.mock.calls[1][0]).toBe(false);
   });
 
   it('should have a logout function', () => {

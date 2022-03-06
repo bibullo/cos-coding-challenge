@@ -12,6 +12,10 @@ describe('AuthQuery', () => {
     expect(query).toBeTruthy();
   });
 
+  it('should have a loading$ observable', () => {
+    expect(query.loading$).toBeDefined();
+  });
+
   it('should have a user$ observable', () => {
     expect(query.user$).toBeDefined();
   });

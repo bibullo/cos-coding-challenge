@@ -12,7 +12,15 @@ describe('AuthStore', () => {
     expect(store).toBeTruthy();
   });
 
-  it('should a updateAuthUser function', () => {
+  it('should have a updateLoadingState function', () => {
+    const updateSpy = jest.spyOn(store, 'update');
+
+    store.updateLoadingState(true);
+
+    expect(updateSpy).toHaveBeenLastCalledWith({ loading: true });
+  });
+
+  it('should have a updateAuthUser function', () => {
     const updateSpy = jest.spyOn(store, 'update');
 
     store.updateAuthUser(authUserMock);

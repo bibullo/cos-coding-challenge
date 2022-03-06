@@ -3,11 +3,13 @@ import { Store, StoreConfig } from '@datorama/akita';
 import { AuthUser } from '../models/auth-user.model';
 
 export interface AuthState {
+  loading: boolean;
   user: AuthUser;
 }
 
 export function createInitialState(): AuthState {
   return {
+    loading: false,
     user: {
       token: '',
       authenticated: false,
@@ -25,6 +27,10 @@ export function createInitialState(): AuthState {
 export class AuthStore extends Store<AuthState> {
   constructor() {
     super(createInitialState());
+  }
+
+  updateLoadingState(loading: boolean): void {
+    this.update({ loading });
   }
 
   updateAuthUser(user: AuthUser): void {

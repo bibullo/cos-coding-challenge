@@ -10,6 +10,8 @@ export class AuthService {
   constructor(private authStore: AuthStore, private http: HttpClient) {}
 
   login(userMailId: string, password: string): void {
+    this.authStore.updateLoadingState(true);
+
     const url = `${environment.apiUrl}/authentication/${userMailId}`;
 
     const body = {
@@ -19,6 +21,7 @@ export class AuthService {
 
     this.http.put<AuthUser>(url, body).subscribe((response: AuthUser) => {
       this.authStore.updateAuthUser(response);
+      this.authStore.updateLoadingState(false);
     });
   }
 
