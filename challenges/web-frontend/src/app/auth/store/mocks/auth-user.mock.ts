@@ -9,3 +9,13 @@ export const authUserMock: AuthUser = {
   type: 1,
   privileges: 'mockPrivileges',
 };
+
+export const nullUserMock: AuthUser = {
+  token: '',
+  authenticated: false,
+  userId: '',
+  internalUserId: 0,
+  internalUserUUID: '',
+  type: 0,
+  privileges: '',
+};
