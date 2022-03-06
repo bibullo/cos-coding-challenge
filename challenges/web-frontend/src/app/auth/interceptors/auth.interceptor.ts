@@ -15,7 +15,7 @@ import { AuthQuery } from '../store/auth.query';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private readonly user$: Observable<AuthUser>;
+  readonly user$: Observable<AuthUser>;
 
   constructor(private authService: AuthService, private authQuery: AuthQuery) {
     this.user$ = this.authQuery.user$;
@@ -30,8 +30,10 @@ export class AuthInterceptor implements HttpInterceptor {
       switchMap((user: AuthUser) => {
         let headers = request.headers;
 
-        headers = headers.set('userid', user.userId);
-        headers = headers.set('authtoken', user.token);
+        if (user.authenticated) {
+          headers = headers.set('userid', user.userId);
+          headers = headers.set('authtoken', user.token);
+        }
 
         const requestCopy = request.clone({ headers });
 
