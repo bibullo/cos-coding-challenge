@@ -4,6 +4,7 @@ module.exports = {
   },
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+  moduleDirectories: ['node_modules', '<rootDir>'],
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!.*.mjs$|@datorama/akita)',
   ],

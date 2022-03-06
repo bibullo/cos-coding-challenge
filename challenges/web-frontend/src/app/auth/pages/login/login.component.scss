@@ -1,0 +1,25 @@
+@import 'variables';
+
+.c-login {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__content {
+    background-color: $light-gray;
+    border-radius: 12px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    width: 250px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+  }
+}

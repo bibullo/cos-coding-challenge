@@ -1,0 +1,41 @@
+<div class="c-login">
+  <div class="c-login__content">
+    <form [formGroup]="loginForm" class="c-login__form">
+      <mat-form-field appearance="outline" color="accent" hideRequiredMarker>
+        <mat-label>E-mail</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+          Field required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" color="accent" hideRequiredMarker>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+          Field required
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        class="c-login__button"
+        mat-stroked-button
+        type="submit"
+        [disabled]="loading$ | async"
+        (click)="onSubmit()"
+      >
+        <ng-container *ngIf="loading$ | async; else loginLabel">
+          <mat-progress-spinner
+            class="c-login__spinner"
+            diameter="34"
+            color="accent"
+            mode="indeterminate"
+          >
+          </mat-progress-spinner>
+        </ng-container>
+
+        <ng-template #loginLabel> Login </ng-template>
+      </button>
+    </form>
+  </div>
+</div>
