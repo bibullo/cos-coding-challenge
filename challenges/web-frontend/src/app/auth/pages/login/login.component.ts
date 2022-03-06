@@ -14,6 +14,8 @@ import { AuthService } from '../../store/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
 
+  isPasswordVisible: boolean;
+
   readonly loading$: Observable<boolean>;
 
   constructor(
@@ -26,7 +28,13 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
 
+    this.isPasswordVisible = false;
+
     this.loading$ = this.authQuery.loading$;
+  }
+
+  toggleVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
   onSubmit(): void {

@@ -57,6 +57,18 @@ describe('LoginComponent', () => {
       expect(component.loading$).toBe(authQuery.loading$);
     });
 
+    it('should have a toggleVisibility function', () => {
+      expect(component.isPasswordVisible).toBe(false);
+
+      component.toggleVisibility();
+
+      expect(component.isPasswordVisible).toBe(true);
+
+      component.toggleVisibility();
+
+      expect(component.isPasswordVisible).toBe(false);
+    });
+
     it('should have a onSubmit function', () => {
       const authService = TestBed.inject(AuthService);
 
@@ -89,6 +101,59 @@ describe('LoginComponent', () => {
 
       expect(loginSpy).toHaveBeenCalledWith('mockEmail', 'mockPassword');
       expect(markAsTouchedSpy).not.toHaveBeenCalled();
+    });
+
+    it('should call for toggleVisibility on visibility icon click', () => {
+      const toggleVisibilitySpy = jest.spyOn(component, 'toggleVisibility');
+
+      const visibilityIcon = fixture.debugElement.query(
+        By.css('.c-login__visibility-icon')
+      );
+
+      visibilityIcon.nativeElement.click();
+      expect(toggleVisibilitySpy).toHaveBeenCalled();
+    });
+
+    it('should change the current icon as visibility changes', () => {
+      const visibilityIcon = fixture.debugElement.query(
+        By.css('.c-login__visibility-icon')
+      );
+
+      expect(visibilityIcon.nativeElement.textContent.trim()).toEqual(
+        'visibility_off'
+      );
+
+      component.toggleVisibility();
+      fixture.detectChanges();
+
+      expect(visibilityIcon.nativeElement.textContent.trim()).toEqual(
+        'visibility'
+      );
+
+      component.toggleVisibility();
+      fixture.detectChanges();
+
+      expect(visibilityIcon.nativeElement.textContent.trim()).toEqual(
+        'visibility_off'
+      );
+    });
+
+    it('should change the input type attribute as visibility changes', () => {
+      const passwordInput = fixture.debugElement.query(
+        By.css('.c-login__password-input')
+      );
+
+      expect(passwordInput.nativeElement.type).toEqual('password');
+
+      component.toggleVisibility();
+      fixture.detectChanges();
+
+      expect(passwordInput.nativeElement.type).toEqual('text');
+
+      component.toggleVisibility();
+      fixture.detectChanges();
+
+      expect(passwordInput.nativeElement.type).toEqual('password');
     });
   });
 

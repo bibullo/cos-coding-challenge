@@ -11,7 +11,21 @@
 
       <mat-form-field appearance="outline" color="accent" hideRequiredMarker>
         <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" />
+        <input
+          class="c-login__password-input"
+          matInput
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          formControlName="password"
+        />
+
+        <mat-icon
+          matSuffix
+          class="c-login__visibility-icon"
+          (click)="toggleVisibility()"
+        >
+          {{ isPasswordVisible ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+
         <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
           Field required
         </mat-error>
