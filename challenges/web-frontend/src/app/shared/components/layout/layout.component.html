@@ -4,7 +4,29 @@
       src="./assets/logo.svg"
       alt="car on sale logo"
       class="c-layout__header-logo"
+      (click)="navigateToRoot()"
     />
+
+    <ng-container *ngIf="(user$ | async)?.authenticated; else loginButton">
+      <button
+        class="c-layout__logout-button"
+        mat-raised-button
+        (click)="onLogout()"
+      >
+        Logout
+      </button>
+    </ng-container>
+
+    <ng-template #loginButton>
+      <button
+        class="c-layout__login-button"
+        mat-raised-button
+        color="accent"
+        (click)="onLogin()"
+      >
+        Login
+      </button>
+    </ng-template>
   </header>
 
   <section class="c-layout__content">
