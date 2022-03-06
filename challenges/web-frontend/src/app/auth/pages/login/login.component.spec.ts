@@ -99,7 +99,18 @@ describe('LoginComponent', () => {
 
       component.onSubmit();
 
-      expect(loginSpy).toHaveBeenCalledWith('mockEmail', 'mockPassword');
+      expect(loginSpy).not.toHaveBeenCalled();
+      expect(markAsTouchedSpy).toHaveBeenCalled();
+
+      markAsTouchedSpy.mockReset();
+      emailControl?.setValue('mock-valid-e-mail@caronsale.de');
+
+      component.onSubmit();
+
+      expect(loginSpy).toHaveBeenCalledWith(
+        'mock-valid-e-mail@caronsale.de',
+        'mockPassword'
+      );
       expect(markAsTouchedSpy).not.toHaveBeenCalled();
     });
 
@@ -164,7 +175,7 @@ describe('LoginComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should call onSubmit for button clicks', () => {
+    it('should call onSubmit for button click', () => {
       const onSubmitSpy = jest.spyOn(component, 'onSubmit');
 
       const button = fixture.debugElement.query(By.css('.c-login__button'));
@@ -205,7 +216,7 @@ describe('LoginComponent', () => {
       expect(spinner).not.toBeNull();
     });
 
-    it('should not call onSubmit for button clicks while loading', () => {
+    it('should not call onSubmit for button click while loading', () => {
       const onSubmitSpy = jest.spyOn(component, 'onSubmit');
 
       const button = fixture.debugElement.query(By.css('.c-login__button'));
