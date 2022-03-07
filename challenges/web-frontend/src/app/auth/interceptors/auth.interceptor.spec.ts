@@ -104,7 +104,7 @@ describe('AuthInterceptor', () => {
       let responseStatus: number = 500;
 
       http.get('/mockUrl').subscribe({
-        complete: () => {
+        next: () => {
           responseStatus = 200;
           done();
         },
@@ -133,7 +133,7 @@ describe('AuthInterceptor', () => {
       let responseStatus: number = 500;
 
       http.get('/mockUrl').subscribe({
-        complete: () => {
+        next: () => {
           responseStatus = 200;
           done();
         },
