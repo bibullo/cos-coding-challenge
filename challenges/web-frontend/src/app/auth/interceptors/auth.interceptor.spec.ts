@@ -116,10 +116,10 @@ describe('AuthInterceptor', () => {
         },
       });
 
-      const request = httpMock.expectOne('/mockUrl');
+      const mockRequest = httpMock.expectOne('/mockUrl');
 
       const mockEvent: ProgressEvent = new ProgressEvent('unauthorized');
-      request.error(mockEvent, { status: 401, statusText: 'unauthorized' });
+      mockRequest.error(mockEvent, { status: 401, statusText: 'unauthorized' });
 
       expect(responseStatus).toEqual(401);
       expect(logoutSpy).toHaveBeenCalled();
@@ -145,10 +145,10 @@ describe('AuthInterceptor', () => {
         },
       });
 
-      const request = httpMock.expectOne('/mockUrl');
+      const mockRequest = httpMock.expectOne('/mockUrl');
 
       const mockEvent: ProgressEvent = new ProgressEvent('forbidden');
-      request.error(mockEvent, { status: 403, statusText: 'forbidden' });
+      mockRequest.error(mockEvent, { status: 403, statusText: 'forbidden' });
 
       expect(responseStatus).toEqual(403);
       expect(logoutSpy).not.toHaveBeenCalled();
