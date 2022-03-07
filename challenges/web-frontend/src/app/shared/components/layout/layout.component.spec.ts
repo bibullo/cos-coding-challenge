@@ -75,12 +75,15 @@ describe('LayoutComponent', () => {
 
     it('should have a onLogout function', () => {
       const authService = TestBed.inject(AuthService);
+      const router = TestBed.inject(Router);
 
       const logoutSpy = jest.spyOn(authService, 'logout');
+      const routerSpy = jest.spyOn(router, 'navigate');
 
       component.onLogout();
 
       expect(logoutSpy).toHaveBeenCalled();
+      expect(routerSpy).toHaveBeenCalledWith(['']);
     });
 
     it('should have a logo', () => {

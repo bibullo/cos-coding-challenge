@@ -37,6 +37,5 @@ export class AuthService {
 
   logout(): void {
     this.authStore.reset();
-    this.router.navigate(['']);
   }
 }

@@ -85,14 +85,10 @@ describe('AuthService', () => {
   });
 
   it('should have a logout function', () => {
-    const router = TestBed.inject(Router);
-
     const storeSpy = jest.spyOn(authStore, 'reset');
-    const routerSpy = jest.spyOn(router, 'navigate');
 
     authService.logout();
 
     expect(storeSpy).toHaveBeenCalled();
-    expect(routerSpy).toHaveBeenCalledWith(['']);
   });
 });

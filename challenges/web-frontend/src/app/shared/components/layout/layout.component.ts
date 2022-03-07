@@ -34,5 +34,6 @@ export class LayoutComponent {
 
   onLogout(): void {
     this.authService.logout();
+    this.router.navigate(['']);
   }
 }
