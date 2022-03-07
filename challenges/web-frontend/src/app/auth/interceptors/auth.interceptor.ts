@@ -28,12 +28,14 @@ export class AuthInterceptor implements HttpInterceptor {
     return this.user$.pipe(
       take(1),
       switchMap((user: AuthUser) => {
+        if (!user.authenticated) {
+          return next.handle(request);
+        }
+
         let headers = request.headers;
 
-        if (user.authenticated) {
-          headers = headers.set('userid', user.userId);
-          headers = headers.set('authtoken', user.token);
-        }
+        headers = headers.set('userid', user.userId);
+        headers = headers.set('authtoken', user.token);
 
         const requestCopy = request.clone({ headers });
 
