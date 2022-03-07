@@ -69,6 +69,21 @@ describe('AuthService', () => {
     expect(routerSpy).toHaveBeenCalledWith(['/auctions']);
   });
 
+  it('should still reset loading state for login errors', () => {
+    const expectedUrl = `${environment.apiUrl}/authentication/mockUserId`;
+    const updateSpy = jest.spyOn(authStore, 'updateLoadingState');
+
+    authService.login('mockUserId', 'mockPassword');
+
+    const mockRequest = httpMock.expectOne(expectedUrl);
+
+    const mockEvent: ProgressEvent = new ProgressEvent('unauthorized');
+    mockRequest.error(mockEvent, { status: 401, statusText: 'unauthorized' });
+
+    expect(updateSpy.mock.calls[0][0]).toBe(true);
+    expect(updateSpy.mock.calls[1][0]).toBe(false);
+  });
+
   it('should have a logout function', () => {
     const router = TestBed.inject(Router);
 

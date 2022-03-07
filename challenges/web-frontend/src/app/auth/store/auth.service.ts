@@ -25,10 +25,13 @@ export class AuthService {
       meta: 'string',
     };
 
-    this.http.put<AuthUser>(url, body).subscribe((response: AuthUser) => {
-      this.authStore.updateAuthUser(response);
-      this.authStore.updateLoadingState(false);
-      this.router.navigate(['/auctions']);
+    this.http.put<AuthUser>(url, body).subscribe({
+      next: (response: AuthUser) => {
+        this.authStore.updateAuthUser(response);
+        this.authStore.updateLoadingState(false);
+        this.router.navigate(['/auctions']);
+      },
+      error: () => this.authStore.updateLoadingState(false),
     });
   }
 
