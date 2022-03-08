@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://api-core-dev.caronsale.de/api/v1',
+  apiUrl: 'https://api-core-dev.caronsale.de/api',
 };

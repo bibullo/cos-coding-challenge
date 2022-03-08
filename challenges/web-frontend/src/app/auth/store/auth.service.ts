@@ -18,7 +18,7 @@ export class AuthService {
   login(userMailId: string, password: string): void {
     this.authStore.updateLoadingState(true);
 
-    const url = `${environment.apiUrl}/authentication/${userMailId}`;
+    const url = `${environment.apiUrl}/v1/authentication/${userMailId}`;
 
     const body = {
       password: password,

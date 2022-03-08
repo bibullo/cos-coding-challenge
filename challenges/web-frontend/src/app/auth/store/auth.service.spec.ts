@@ -47,7 +47,7 @@ describe('AuthService', () => {
     const router = TestBed.inject(Router);
 
     const expectedBody = { password: 'mockPassword', meta: 'string' };
-    const expectedUrl = `${environment.apiUrl}/authentication/mockUserId`;
+    const expectedUrl = `${environment.apiUrl}/v1/authentication/mockUserId`;
 
     const storeSpy = jest.spyOn(authStore, 'updateAuthUser');
     const updateSpy = jest.spyOn(authStore, 'updateLoadingState');
@@ -70,7 +70,7 @@ describe('AuthService', () => {
   });
 
   it('should still reset loading state for login errors', () => {
-    const expectedUrl = `${environment.apiUrl}/authentication/mockUserId`;
+    const expectedUrl = `${environment.apiUrl}/v1/authentication/mockUserId`;
     const updateSpy = jest.spyOn(authStore, 'updateLoadingState');
 
     authService.login('mockUserId', 'mockPassword');
