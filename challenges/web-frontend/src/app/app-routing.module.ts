@@ -29,6 +29,10 @@ const routes: Routes = [
             (module) => module.AuctionsModule
           ),
       },
+      {
+        path: '**',
+        redirectTo: '',
+      },
     ],
   },
 ];
