@@ -5,10 +5,11 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 
 import { LayoutComponent } from './components/layout/layout.component';
+import { TimeLeftPipe } from './pipes/time-left.pipe';
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, TimeLeftPipe],
   imports: [CommonModule, RouterModule, MatButtonModule],
-  exports: [LayoutComponent],
+  exports: [LayoutComponent, TimeLeftPipe],
 })
 export class SharedModule {}
