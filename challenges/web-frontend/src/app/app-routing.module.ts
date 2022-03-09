@@ -13,6 +13,15 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: 'home',
+        component: SampleScreenComponent,
+        data: {
+          title: 'Home',
+          subtitle: 'Landing Page',
+          illustration: '/assets/logo.svg',
+        },
+      },
+      {
         path: 'login',
         canActivate: [AuthGuard],
         loadChildren: () =>
@@ -38,6 +47,11 @@ const routes: Routes = [
           subtitle: 'Not Found',
           illustration: '/assets/logo.svg',
         },
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
       },
       {
         path: '**',
