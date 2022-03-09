@@ -14,10 +14,17 @@
     padding: 50px 100px;
     border-radius: 12px;
     background-color: $light-yellow;
+
+    @media (max-width: 600px) {
+      padding: 50px 50px;
+    }
   }
 
   &__illustration {
     width: 300px;
-    width: 300px;
+
+    @media (max-width: 600px) {
+      width: 250px;
+    }
   }
 }

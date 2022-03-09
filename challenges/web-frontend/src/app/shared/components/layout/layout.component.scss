@@ -24,11 +24,19 @@
     display: flex;
     align-items: center;
     gap: 50px;
+
+    @media (max-width: 600px) {
+      gap: 25px;
+      margin-left: 5%;
+    }
   }
 
   &__logout-button,
   &__login-button {
     margin-right: 20%;
+    @media (max-width: 600px) {
+      margin-right: 5%;
+    }
   }
 
   &__content {
