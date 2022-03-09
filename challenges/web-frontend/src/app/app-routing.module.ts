@@ -5,6 +5,7 @@ import { AuthGuard } from './auth/guards/auth/auth.guard';
 import { RolesGuard } from './auth/guards/roles/roles.guard';
 
 import { LayoutComponent } from 'src/app/shared/components/layout/layout.component';
+import { SampleScreenComponent } from './shared/components/sample-screen/sample-screen.component';
 
 const routes: Routes = [
   {
@@ -30,8 +31,17 @@ const routes: Routes = [
           ),
       },
       {
+        path: '404',
+        component: SampleScreenComponent,
+        data: {
+          title: '404',
+          subtitle: 'Not Found',
+          illustration: '/assets/logo.svg',
+        },
+      },
+      {
         path: '**',
-        redirectTo: '',
+        redirectTo: '404',
       },
     ],
   },
