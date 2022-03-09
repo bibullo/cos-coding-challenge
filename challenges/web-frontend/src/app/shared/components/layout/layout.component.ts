@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -11,7 +11,6 @@ import { AuthService } from 'src/app/auth/store/auth.service';
   selector: 'cos-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {
   readonly user$: Observable<AuthUser>;
@@ -35,5 +34,9 @@ export class LayoutComponent {
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['']);
+  }
+
+  onAuctions(): void {
+    this.router.navigate(['/auctions']);
   }
 }

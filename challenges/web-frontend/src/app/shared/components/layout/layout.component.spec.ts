@@ -5,6 +5,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { of } from 'rxjs';
+import { authUserMock } from 'src/app/auth/store/mocks/auth-user.mock';
+
 import { AuthQuery } from 'src/app/auth/store/auth.query';
 import { AuthQueryMock } from 'src/app/auth/store/mocks/auth.query.mock';
 
@@ -27,6 +30,7 @@ describe('LayoutComponent', () => {
         RouterTestingModule.withRoutes([
           { path: '', component: DumbComponent },
           { path: 'login', component: DumbComponent },
+          { path: 'auctions', component: DumbComponent },
         ]),
       ],
       providers: [
@@ -86,6 +90,21 @@ describe('LayoutComponent', () => {
       expect(routerSpy).toHaveBeenCalledWith(['']);
     });
 
+    it('should have a onAuctions function', () => {
+      const router = TestBed.inject(Router);
+      const routerSpy = jest.spyOn(router, 'navigate');
+
+      component.onAuctions();
+
+      expect(routerSpy).toHaveBeenCalledWith(['/auctions']);
+    });
+
+    it('should have a header', () => {
+      const header = fixture.debugElement.query(By.css('.c-layout__header'));
+
+      expect(header).not.toBeNull();
+    });
+
     it('should have a logo', () => {
       const logo = fixture.debugElement.query(By.css('.c-layout__header-logo'));
 
@@ -110,7 +129,15 @@ describe('LayoutComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should have a login button when user is unauthenticated', () => {
+    it('should not have an auctions button for unauthenticated users', () => {
+      const auctionsButton = fixture.debugElement.query(
+        By.css('.c-layout__auctions-button')
+      );
+
+      expect(auctionsButton).toBeNull();
+    });
+
+    it('should have a login button for unauthenticated users', () => {
       const loginButton = fixture.debugElement.query(
         By.css('.c-layout__login-button')
       );
@@ -148,7 +175,44 @@ describe('LayoutComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should have a logout button when user is authenticated', () => {
+    it('should not have an auctions button for authenticated users without salesman privileges', () => {
+      const auctionsButton = fixture.debugElement.query(
+        By.css('.c-layout__auctions-button')
+      );
+
+      expect(auctionsButton).toBeNull();
+    });
+
+    it('should have an auctions button for authenticated users with salesman privileges', () => {
+      const salesmanUser = { ...authUserMock, privileges: '{SALESMAN_USER}' };
+      Object.defineProperty(component, 'user$', { value: of(salesmanUser) });
+
+      fixture.detectChanges();
+
+      const auctionsButton = fixture.debugElement.query(
+        By.css('.c-layout__auctions-button')
+      );
+
+      expect(auctionsButton).not.toBeNull();
+      expect(auctionsButton.nativeElement.textContent.trim()).toBe('Auctions');
+    });
+
+    it('should call onAuctions for auctions button click', () => {
+      const salesmanUser = { ...authUserMock, privileges: '{SALESMAN_USER}' };
+      Object.defineProperty(component, 'user$', { value: of(salesmanUser) });
+
+      fixture.detectChanges();
+
+      const onAuctionsSpy = jest.spyOn(component, 'onAuctions');
+      const auctionsButton = fixture.debugElement.query(
+        By.css('.c-layout__auctions-button')
+      );
+
+      auctionsButton.nativeElement.click();
+      expect(onAuctionsSpy).toHaveBeenCalled();
+    });
+
+    it('should have a logout button for authenticated users', () => {
       const logoutButton = fixture.debugElement.query(
         By.css('.c-layout__logout-button')
       );

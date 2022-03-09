@@ -9,7 +9,7 @@
     height: 5rem;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: $light-gray;
 
     &-logo {
@@ -17,6 +17,18 @@
       height: 70px;
       cursor: pointer;
     }
+  }
+
+  &__navigation {
+    margin-left: 20%;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+  }
+
+  &__logout-button,
+  &__login-button {
+    margin-right: 20%;
   }
 
   &__content {

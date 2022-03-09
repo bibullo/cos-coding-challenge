@@ -1,13 +1,25 @@
 <div class="c-layout">
-  <header class="c-layout__header">
-    <img
-      src="./assets/logo.svg"
-      alt="car on sale logo"
-      class="c-layout__header-logo"
-      (click)="navigateToRoot()"
-    />
+  <header class="c-layout__header" *ngIf="user$ | async as user">
+    <section class="c-layout__navigation">
+      <img
+        src="./assets/logo.svg"
+        alt="car on sale logo"
+        class="c-layout__header-logo"
+        (click)="navigateToRoot()"
+      />
 
-    <ng-container *ngIf="(user$ | async)?.authenticated; else loginButton">
+      <ng-container *ngIf="user.privileges === '{SALESMAN_USER}'">
+        <button
+          class="c-layout__auctions-button"
+          mat-raised-button
+          (click)="onAuctions()"
+        >
+          Auctions
+        </button>
+      </ng-container>
+    </section>
+
+    <ng-container *ngIf="user.authenticated; else loginButton">
       <button
         class="c-layout__logout-button"
         mat-raised-button
