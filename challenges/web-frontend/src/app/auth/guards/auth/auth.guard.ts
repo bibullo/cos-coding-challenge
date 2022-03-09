@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       take(1),
       switchMap((user: AuthUser) => {
         if (!user.authenticated) {
-          this.router.navigate(['']);
+          this.router.navigate(['/404']);
           return of(false);
         }
 

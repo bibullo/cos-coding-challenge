@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -7,12 +8,19 @@ import { AuthQueryMock } from '../../store/mocks/auth.query.mock';
 
 import { AuthGuard } from './auth.guard';
 
+@Component({})
+class DumbComponent {}
+
 describe('AuthGuard', () => {
   let guard: AuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: '404', component: DumbComponent },
+        ]),
+      ],
       providers: [
         { provide: AuthQuery, useValue: new AuthQueryMock(false, true) },
       ],
@@ -42,7 +50,7 @@ describe('AuthGuard', () => {
 
       res$.subscribe((allowed) => {
         expect(allowed).toBe(false);
-        expect(routerSpy).toHaveBeenCalled();
+        expect(routerSpy).toHaveBeenCalledWith(['']);
         done();
       });
     });
@@ -55,7 +63,7 @@ describe('AuthGuard', () => {
 
       res$.subscribe((allowed) => {
         expect(allowed).toBe(true);
-        expect(routerSpy).not.toHaveBeenCalled();
+        expect(routerSpy).not.toHaveBeenCalledWith(['/404']);
         done();
       });
     });
@@ -78,7 +86,7 @@ describe('AuthGuard', () => {
 
       res$.subscribe((allowed) => {
         expect(allowed).toBe(true);
-        expect(routerSpy).not.toHaveBeenCalled();
+        expect(routerSpy).not.toHaveBeenCalledWith(['']);
         done();
       });
     });
@@ -91,7 +99,7 @@ describe('AuthGuard', () => {
 
       res$.subscribe((allowed) => {
         expect(allowed).toBe(false);
-        expect(routerSpy).toHaveBeenCalled();
+        expect(routerSpy).toHaveBeenCalledWith(['/404']);
         done();
       });
     });
