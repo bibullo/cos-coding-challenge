@@ -79,15 +79,14 @@ describe('LayoutComponent', () => {
 
     it('should have a onLogout function', () => {
       const authService = TestBed.inject(AuthService);
-      const router = TestBed.inject(Router);
 
       const logoutSpy = jest.spyOn(authService, 'logout');
-      const routerSpy = jest.spyOn(router, 'navigate');
+      const navigateSpy = jest.spyOn(component, 'navigateToRoot');
 
       component.onLogout();
 
       expect(logoutSpy).toHaveBeenCalled();
-      expect(routerSpy).toHaveBeenCalledWith(['']);
+      expect(navigateSpy).toHaveBeenCalled();
     });
 
     it('should have a onAuctions function', () => {
