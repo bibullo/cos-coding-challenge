@@ -178,18 +178,22 @@ describe('LoginComponent', () => {
     it('should call onSubmit for button click', () => {
       const onSubmitSpy = jest.spyOn(component, 'onSubmit');
 
-      const button = fixture.debugElement.query(By.css('.c-login__button'));
+      const loginButton = fixture.debugElement.query(
+        By.css('.c-login__button')
+      );
 
-      button.nativeElement.click();
+      loginButton.nativeElement.click();
       expect(onSubmitSpy).toHaveBeenCalled();
     });
 
     it('should have a login label and no spinner when loading is false', () => {
       const spinner = fixture.debugElement.query(By.css('.c-login__spinner'));
-      const button = fixture.debugElement.query(By.css('.c-login__button'));
+      const loginButton = fixture.debugElement.query(
+        By.css('.c-login__button')
+      );
 
       expect(spinner).toBeNull();
-      expect(button.nativeElement.textContent.trim()).toBe('Login');
+      expect(loginButton.nativeElement.textContent.trim()).toBe('Login');
     });
   });
 
@@ -205,9 +209,11 @@ describe('LoginComponent', () => {
     });
 
     it('should have a disabled attribute while loading', () => {
-      const button = fixture.debugElement.query(By.css('.c-login__button'));
+      const loginButton = fixture.debugElement.query(
+        By.css('.c-login__button')
+      );
 
-      expect(button.nativeElement.disabled).toEqual(true);
+      expect(loginButton.nativeElement.disabled).toEqual(true);
     });
 
     it('should have a mat spinner while loading', () => {
@@ -219,9 +225,11 @@ describe('LoginComponent', () => {
     it('should not call onSubmit for button click while loading', () => {
       const onSubmitSpy = jest.spyOn(component, 'onSubmit');
 
-      const button = fixture.debugElement.query(By.css('.c-login__button'));
+      const loginButton = fixture.debugElement.query(
+        By.css('.c-login__button')
+      );
 
-      button.nativeElement.click();
+      loginButton.nativeElement.click();
       expect(onSubmitSpy).not.toHaveBeenCalled();
     });
   });
