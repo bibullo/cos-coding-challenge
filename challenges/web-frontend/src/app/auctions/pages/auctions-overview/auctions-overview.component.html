@@ -1,1 +1,10 @@
-<p>auctions-overview works!</p>
+<ng-container *ngIf="auctions$ | async as auctions">
+  <div class="c-auctions-overview">
+    <ng-container *ngFor="let auction of auctions">
+      <cos-auction-card
+        class="c-auctions-overview__card"
+        [auction]="auction"
+      ></cos-auction-card>
+    </ng-container>
+  </div>
+</ng-container>
