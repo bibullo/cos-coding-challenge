@@ -50,7 +50,7 @@ export class RolesGuard implements CanActivate {
   }
 
   denyAccess(): Observable<boolean> {
-    this.router.navigate(['']);
+    this.router.navigate(['/404']);
     return of(false);
   }
 }

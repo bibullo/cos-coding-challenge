@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -7,12 +8,19 @@ import { AuthQueryMock } from '../../store/mocks/auth.query.mock';
 
 import { RolesGuard } from './roles.guard';
 
+@Component({})
+class DumbComponent {}
+
 describe('RolesGuard', () => {
   let guard: RolesGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: '404', component: DumbComponent },
+        ]),
+      ],
       providers: [
         { provide: AuthQuery, useValue: new AuthQueryMock(false, true) },
       ],
@@ -36,7 +44,7 @@ describe('RolesGuard', () => {
 
       res$.subscribe((allowed) => {
         expect(allowed).toBe(false);
-        expect(routerSpy).toHaveBeenCalledWith(['']);
+        expect(routerSpy).toHaveBeenCalledWith(['/404']);
         done();
       });
     });
