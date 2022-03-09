@@ -1,0 +1,30 @@
+@import 'variables';
+
+.c-auction-card {
+  display: inline-block;
+  background-color: $dark-gray;
+
+  &__image {
+    display: block;
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+  }
+
+  &__infos {
+    background-color: $light-gray;
+    margin: 12px;
+    padding: 10px;
+    border-radius: 12px;
+
+    p:last-of-type {
+      margin: 0;
+    }
+  }
+
+  &__info {
+    &-label {
+      color: $dark-gray;
+    }
+  }
+}

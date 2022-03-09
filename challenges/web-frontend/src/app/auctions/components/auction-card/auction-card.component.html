@@ -1,0 +1,69 @@
+<div class="c-auction-card">
+  <img
+    class="c-auction-card__image"
+    alt="car image"
+    [src]="
+      auction.associatedVehicle.vehicleImages[0]['url'] ===
+      'https://app.caronsale.de/assets/logo/cos/logo-solid.png'
+        ? '/assets/logo.svg'
+        : auction.associatedVehicle.vehicleImages[0]['url']
+    "
+  />
+
+  <div class="c-auction-card__infos">
+    <p class="c-auction-card__info">
+      <span class="c-auction-card__info-label">Manufacturer: </span>
+      <span>{{ auction.associatedVehicle.make }}</span>
+    </p>
+
+    <p class="c-auction-card__info">
+      <span class="c-auction-card__info-label">First registration(EZ): </span>
+      <span>{{ auction.associatedVehicle.ez }}</span>
+    </p>
+
+    <p class="c-auction-card__info">
+      <span class="c-auction-card__info-label">Mileage: </span>
+      <span class="c-auction-card__info--mileage">{{
+        auction.associatedVehicle.mileageInKm | number
+      }}</span>
+      Km
+    </p>
+
+    <p class="c-auction-card__info">
+      <span class="c-auction-card__info-label">Fuel type: </span>
+      <span class="c-auction-card__info--fuel">{{
+        fuelTypes[auction.associatedVehicle.fuelType]
+      }}</span>
+    </p>
+
+    <p class="c-auction-card__info">
+      <span class="c-auction-card__info-label">Transmission type: </span>
+      <span class="c-auction-card__info--transmission">{{
+        transmissionTypes[auction.associatedVehicle.transmission]
+      }}</span>
+    </p>
+  </div>
+
+  <div class="c-auction-card__infos">
+    <p class="c-auction-card__info">
+      <span class="c-auction-card__info-label">Current highest bid: </span>
+      <span class="c-auction-card__info--bid">{{
+        auction.currentHighestBidValue | currency: 'EUR':'symbol':'1.0'
+      }}</span>
+    </p>
+
+    <p class="c-auction-card__info">
+      <span class="c-auction-card__info-label">Are you highest bidder? </span>
+      <span class="c-auction-card__info--highest">{{
+        auction.amIHighestBidder ? 'Yes' : 'No'
+      }}</span>
+    </p>
+
+    <p class="c-auction-card__info">
+      <span class="c-auction-card__info-label">Auction time left: </span>
+      <span class="c-auction-card__info--time">{{
+        auction.remainingTimeInSeconds | timeLeft
+      }}</span>
+    </p>
+  </div>
+</div>
